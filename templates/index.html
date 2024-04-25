@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.stock.min.js"></script>
+</head>
+
+<body>
+    <form action="/search" method="GET">
+        <input type="text" name="id" placeholder="input party number..." />
+        <button type="submit">Search</button>
+    </form>
+    <select onchange="changeChartVersion(value);" name="ChartVersion" id="select-chart-version" style="width: 65px;">
+        <option value="day" selected>day</option>
+        <option value="week">week</option>
+        <option value="month">month</option>
+    </select>
+    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+</body>
+
+</html>
+<script>
+    var data_dict = {{ data| safe}};
+    var intervalType;
+    var interval;
+    var valueFormatString;
+    var minimum;
+    var maximum;
+</script>
+<script src="{{ url_for('static', filename='index.js') }}">
+</script>
+<script>
+    window.onload = initChart(data_dict.dataDay, "day", 1, "MMM-DD", new Date(2022, 03, 01), new Date(2022, 05, 01));
+</script>
